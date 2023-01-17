@@ -2,3 +2,4 @@ uuid==1.30
 SQLAlchemy==1.4.46
 fastapi==0.89.1
 pydantic==1.10.4
+uvicorn==0.20.0

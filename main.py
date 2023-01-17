@@ -2,10 +2,17 @@ from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
 import crud, models, schemas
 from database import SessionLocal, engine
+import uvicorn
 
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+
+if __name__=='__main__':
+    uvicorn.run('main:app', reload=True)
+
+
 
 
 def get_db():

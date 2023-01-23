@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  web_2_app:
+    container_name: web_2_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - SQLALCHEMY_DATABASE_URL = ./sql_app.db
+      - SQLALCHEMY_SILENCE_UBER_WARNING=1
+    entrypoint:
+      sh -c '
+        echo "Starting project..." &&
+        echo "Hello world" &&
+        uvicorn main:app --host 0.0.0.0 --reload
+      '
+    networks:
+      - web_2_network
+    ports:
+      - "8000:8000"
+    depends_on:
+      web_2_redis:
+        condition: service_healthy
+
+  web_2_redis:
+    container_name: web_2_redis
+    image: redis:latest
+    expose:
+      - 6379
+    ports:
+      - "9000:6379"
+    networks:
+      - web_2_network
+    healthcheck:
+      test: ["CMD", "redis-cli","ping"]
+      interval: 5s
+      timeout: 20s
+      retries: 100
+networks:
+  web_2_network:
+    name: web_2_network
+

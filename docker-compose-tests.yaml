@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  test_web_2_app:
+    container_name: test_web_2_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - SQLALCHEMY_DATABASE_URL = ./sql_app.db
+      - SQLALCHEMY_SILENCE_UBER_WARNING=1
+    command:
+       "pytest -vv"
+    networks:
+      - test_network
+networks:
+  test_network:
+    external:
+      name: web_2_network

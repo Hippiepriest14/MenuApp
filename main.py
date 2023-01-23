@@ -33,10 +33,10 @@ def create_menu(menu: schemas.MenuCreate, db: Session = Depends(get_db)):
         return crud.create_menu(db=db, menu=menu)
 
 
-@app.get("/api/v1/menus", response_model=list[schemas.Menu])
+@app.get("/api/v1/menus", response_model=list[schemas.Menu],status_code=200)
 def read_menu(db: Session = Depends(get_db)):
-    menu = crud.get_menu(db=db)
-    return menu
+    db_menu = crud.get_menu(db=db)
+    return db_menu
 
 
 @app.get("/api/v1/menus/{menu_id}", response_model=schemas.Menu, status_code=200)
@@ -55,7 +55,7 @@ def delete_menu(menu_id: str, db: Session = Depends(get_db)):
     return {"status": True, "message": "The menu has been deleted"}
 
 
-@app.patch("/api/v1/menus/{menu_id}", response_model=schemas.Menu)
+@app.patch("/api/v1/menus/{menu_id}", response_model=schemas.Menu,status_code=200)
 def update_menu(menu_id: str, menu: schemas.MenuUpdate, db: Session = Depends(get_db)):
     db_menu = crud.get_menu_id(db=db, menu_id=menu_id)
     if db_menu:

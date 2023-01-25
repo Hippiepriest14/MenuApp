@@ -35,8 +35,8 @@ def create_menu(menu: schemas.MenuCreate, db: Session = Depends(get_db)):
 
 @app.get("/api/v1/menus", response_model=list[schemas.Menu],status_code=200)
 def read_menu(db: Session = Depends(get_db)):
-    db_menu = crud.get_menu(db=db)
-    return db_menu
+    menu = crud.get_menu(db=db)
+    return menu
 
 
 @app.get("/api/v1/menus/{menu_id}", response_model=schemas.Menu, status_code=200)

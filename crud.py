@@ -8,7 +8,7 @@ def get_menu(db: Session):
     return db.query(models.Menu).all()
 
 
-def create_menu(db: Session, menu: schemas.MenuBase):
+def create_menu(db: Session, menu: schemas.MenuCreate):
     db_menu = models.Menu(**menu.dict())
     db_menu.id = str(0)
     db.add(db_menu)
@@ -43,7 +43,7 @@ def get_submenu(db: Session):
     return db.query(models.SubMenu).all()
 
 
-def create_submenu(db: Session, submenu: schemas.SubMenuBase, menu_id: str):
+def create_submenu(db: Session, submenu: schemas.SubMenuCreate, menu_id: str):
     db_submenu = models.SubMenu(**submenu.dict())
     db_submenu.menu_id = menu_id
     db_submenu.id = str(0)
@@ -79,9 +79,9 @@ def get_dish(db: Session):
     return db.query(models.Dish).all()
 
 
-def create_dish(db: Session, dish: schemas.DishBase, menu_id: str,submenu_id:str):
+def create_dish(db: Session, dish: schemas.DishCreate, menu_id: str,submenu_id:str):
     db_dish = models.Dish(**dish.dict())
-    db_dish.id = str(0)
+    db_dish.id = str(uuid.uuid1())
     db_dish.submenu_id = submenu_id
     get_menu_id(db=db, menu_id=menu_id).dishes_count += 1
     get_submenu_id(db=db,submenu_id=submenu_id).dishes_count +=1

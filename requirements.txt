@@ -6,3 +6,4 @@ uvicorn==0.20.0
 pytest==7.2.1
 httpx==0.23.3
 anyio==3.6.2
+pre-commit==3.0.1

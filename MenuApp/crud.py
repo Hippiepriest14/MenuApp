@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-import models
-import schemas
+from MenuApp import models
+from MenuApp import schemas
 import uuid
 
 # MENU

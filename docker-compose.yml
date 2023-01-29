@@ -40,4 +40,3 @@ services:
 networks:
   web_2_network:
     name: web_2_network
-

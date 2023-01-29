@@ -1,8 +1,10 @@
 from pydantic import BaseModel
 
-#MENU
+# MENU
+
+
 class MenuBase(BaseModel):
-    id : str | None = None
+    id: str | None = None
     title: str
     description: str
 
@@ -17,12 +19,15 @@ class MenuUpdate(MenuBase):
 
 
 class Menu(MenuBase):
-    submenus_count : int
-    dishes_count : int
+    submenus_count: int
+    dishes_count: int
+
     class Config:
         orm_mode = True
 
-#SUBMENU
+# SUBMENU
+
+
 class SubMenuBase(BaseModel):
     id: str | None = None
     title: str
@@ -30,7 +35,7 @@ class SubMenuBase(BaseModel):
 
 
 class SubMenuCreate(SubMenuBase):
-    dishes_count : int = 0
+    dishes_count: int = 0
 
 
 class SubMenuUpdate(SubMenuBase):
@@ -38,14 +43,15 @@ class SubMenuUpdate(SubMenuBase):
 
 
 class SubMenu(SubMenuBase):
-    dishes_count : int
+    dishes_count: int
+
     class Config:
         orm_mode = True
 
 
-#DISH
+# DISH
 class DishBase(BaseModel):
-    id : str | None = None
+    id: str | None = None
     title: str
     description: str | None = None
     price: str | None = None
@@ -57,6 +63,7 @@ class DishCreate(DishBase):
 
 class DishUpdate(DishBase):
     pass
+
 
 class Dish(DishBase):
 

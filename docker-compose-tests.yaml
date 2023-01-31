@@ -11,9 +11,4 @@ services:
       - SQLALCHEMY_SILENCE_UBER_WARNING=1
     command:
        "pytest -vv"
-    networks:
-      - test_network
-networks:
-  test_network:
-    external:
-      name: web_2_network
+
